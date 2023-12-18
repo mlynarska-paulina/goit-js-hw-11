@@ -68,8 +68,10 @@ async function fetchThen(value) {
     if (myArr.length < 20) {
       loadMore.hidden = true;
     }
+    loadMore.hidden = false;
   } catch (error) {
     console.log(error);
+    loadMore.hidden = false;
   }
 }
 
@@ -84,6 +86,13 @@ async function addImage() {
     lightbox.refresh();
 
     if (resp.data.hits.length < limitAdd) {
+      loadMore.hidden = true;
+    }
+
+    if (resp.data.total <= 40 * myPage) {
+      Notiflix.Notify.info(
+        'We are sorry, but you have reached the end of search results.'
+      );
       loadMore.hidden = true;
     }
   } catch (error) {
