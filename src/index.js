@@ -69,6 +69,13 @@ async function fetchThen(value) {
       loadMore.hidden = true;
     }
     loadMore.hidden = false;
+
+    if (resp.data.total <= 40 * myPage) {
+      Notiflix.Notify.info(
+        'We are sorry, but you have reached the end of search results.'
+      );
+      loadMore.hidden = true;
+    }
   } catch (error) {
     console.log(error);
     loadMore.hidden = false;
